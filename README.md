@@ -67,13 +67,14 @@ convert icon.png -fuzz 6% -trim +repage icon-trimmed.png
 ### Step 2: Make the image square using extent
 
 ```bash
+APP_BG_COLOR="#FFFFFF"
 w=$(identify -format "%w" icon-trimmed.png)
 h=$(identify -format "%h" icon-trimmed.png)
 s=$(( w > h ? w : h ))
 
 convert icon-trimmed.png \
     -gravity center \
-    -background "<APP_BG_COLOR>" \
+    -background "$APP_BG_COLOR" \
     -extent "${s}x${s}" \
     icon-square.png
 ```
@@ -102,7 +103,7 @@ to fit inside the central 80% safe area.
 convert icon-square.png \
     -resize 410x410 \
     -gravity center \
-    -background "<APP_BG_COLOR>" \
+    -background "$APP_BG_COLOR" \
     -extent 512x512 \
     icon-maskable-512.png
 ```
